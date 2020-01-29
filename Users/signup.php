@@ -13,30 +13,30 @@
         </div>
             <hr />                                  
             <form class="full-width" style="display: flex;flex-flow: row wrap;" method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
-                <div style="width:70%">
-                    <input type="text" name="FirstName" class="form-control" placeholder="write your name here" required />
-                <br />
-                <input type="email" name="Email" class="form-control" placeholder="write your email here" required />
-                <br />
-                <input type="password" name="Password" class="form-control" placeholder="write password"  required />
-                <br />
-                <input type="password" name="ConfirmPassword" class="form-control" placeholder="confirm your password" required />
-                <br />                    
+                <div style="width:100%;display: flex;justify-content:center ;border: solid 1px red">
+                    <div>
+                        <input type="text" name="FirstName" class="form-control" placeholder="write your name here" required />
+                        <br />
+                        <input type="email" name="Email" class="form-control" placeholder="write your email here" required />
+                        <br />
+                        <input type="password" name="Password" class="form-control" placeholder="write password"  required />
+                        <br />
+                        <input type="password" name="ConfirmPassword" class="form-control" placeholder="confirm your password" required />
+                        <br />                    
+                        </div>
+
+                        <div style="border-radius: 5px;padding: 10px 10px 0px 10px;box-shadow: 0 4px 8px 0 lightskyblue, 0 6px 20px 0px lightskyblue;" >
+                            <img id="imagePreview" style="display: inline-block" width="300" height="150"> 
+                            <div id="pictureupload" style="padding: 10px 0px 10px 0px " >
+                              <label id="piclable" style="background-color: black;color:lightskyblue;cursor: pointer" onclick="CheckFile()" >
+                                  <p id="picname" style="margin:0px" > upload picture </p>
+                               <input type='file' id="fileUpload" name='file' style="display: none" accept=".png,.jpg,.jpeg,.gif,.tif" onchange="ShowImagePreview(this,document.getElementById('imagePreview'))" />                 
+                              </label>
+                           </div>
+                        </div>
+
                 </div>
-                
-                
-                <div style="border-radius: 5px;margin-right: 10%;max-width: 20%;max-height:20%;box-shadow: 0 4px 8px 0 lightskyblue, 0 6px 20px 0px lightskyblue;" >
-                    <img id="imagePreview" style="max-width:80%;max-height:20%;margin-top: 10%" width="600" height="150"> 
-                    <div id="pictureupload" style="padding: 10px 0px 10px 0px " >
-                      <label id="piclable" style="background-color: black;color:lightskyblue;cursor: pointer" onclick="CheckFile()" >
-                          <p id="picname" style="margin:0px" > upload picture </p>
-                       <input type='file' id="fileUpload" name='file' style="display: none" accept=".png,.jpg,.jpeg,.gif,.tif" onchange="ShowImagePreview(this,document.getElementById('imagePreview'))" />                 
-                      </label>
-                   </div>
-                </div>
-                
-                
-                
+                <br>
                 <div style="width: 100%" >
                     <input class="form-control" type="submit" />                   
                 </div>
