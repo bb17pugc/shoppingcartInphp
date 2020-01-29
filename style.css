@@ -1,0 +1,84 @@
+body{
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;  
+}
+ #pictureupload:hover
+              {
+                color: white;
+                background-color: lightskyblue;
+                transition: 1s; 
+              }
+              #pictureupload:hover  p
+              {
+                color: white;
+              }  
+h1{
+    font-family: sans-serif;
+}
+.navigation-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: gray;
+  width: 100%;
+}
+ 
+.navigation-menu >  li 
+{
+    display: block;
+    float: left;
+}
+.navigation-menu > li > a 
+{
+
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}
+.navigation-menu >  li > a:hover
+{
+   background-color: lightskyblue;
+   transition:0.5s;   
+   cursor: pointer;
+}
+ .text-center
+               {
+                   text-align: center;
+                   color: lightskyblue;
+               }
+               hr
+               {
+                   background-color:  lightskyblue;
+                   height: 1px;
+                   border: none;
+               }
+               .form-control
+               {
+                   border:1px solid lightskyblue;
+                   padding: 10px;
+                   border-radius: 4px;
+                   width: 40%;
+                   margin-bottom: 5px;
+               }
+               .full-width
+               {
+                   width: 100%;
+                   text-align: center;
+               }
+               input::placeholder
+               {
+                   color: lightskyblue;
+               }
+               input[type="submit"]
+               {
+                   background-color: lightskyblue;
+                   color : white;
+                   font-weight: bolder;
+                   font-size: 20px;
+                   cursor: pointer;
+               }
