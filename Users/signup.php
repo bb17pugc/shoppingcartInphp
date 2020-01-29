@@ -13,7 +13,7 @@
         </div>
             <hr />                                  
             <form class="full-width" style="display: flex;flex-flow: row wrap;" method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
-                <div style="width:100%;display: flex;justify-content:center ;border: solid 1px red">
+                <div style="width:100%;display: flex;justify-content:center ;">
                     <div>
                         <input type="text" name="FirstName" class="form-control" placeholder="write your name here" required />
                         <br />
@@ -24,9 +24,11 @@
                         <input type="password" name="ConfirmPassword" class="form-control" placeholder="confirm your password" required />
                         <br />                    
                         </div>
-
-                        <div style="border-radius: 5px;padding: 10px 10px 0px 10px;box-shadow: 0 4px 8px 0 lightskyblue, 0 6px 20px 0px lightskyblue;" >
-                            <img id="imagePreview" style="display: inline-block" width="300" height="150"> 
+                    <div style="width:10%">
+                        
+                    </div>
+                        <div style="border-radius: 5px;padding: 10px 10px 10px 10px;box-shadow: 0 4px 8px 0 lightskyblue, 0 6px 20px 0px lightskyblue;" >
+                            <img id="imagePreview" style="display: inline-block" width="200" height="150"> 
                             <div id="pictureupload" style="padding: 10px 0px 10px 0px " >
                               <label id="piclable" style="background-color: black;color:lightskyblue;cursor: pointer" onclick="CheckFile()" >
                                   <p id="picname" style="margin:0px" > upload picture </p>
