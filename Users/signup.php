@@ -1,4 +1,5 @@
 <?php 
+//ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';  
                require ("../HeadersAndFooters/header.php");
                require '../Errors.php';
                if(isset($_SESSION['CurrentUser']))
