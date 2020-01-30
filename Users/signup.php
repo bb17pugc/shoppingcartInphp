@@ -6,7 +6,9 @@
                {
                    exit(header('location:http://localhost/ShoppingCart/WebView/home.php', false));                                    
                }
-         ?>  
+               error_reporting(E_ALL);
+               ini_set('display_errors', 'On');
+ ?>  
         <div>
             <h1 class="text-center"  >
                 Register here
@@ -47,8 +49,8 @@
 <div style="resize: both;">
 <?php
  if ($_SERVER["REQUEST_METHOD"] == "POST")
-{   
-  $Name = $Email = $Password = $ConfirmPassword = $Picture = "";
+ {   
+               $Name = $Email = $Password = $ConfirmPassword = $Picture = "";
                $obj = new Errors();
                          $Name = $_POST['FirstName'];
                          $Email = $_POST['Email'];
@@ -63,7 +65,7 @@
                        if($result->num_rows > 0)
                        {
                            $Errors['DuplicateUser'] ="User exists already";
-                           ShowError();
+                           //ShowError();
                            die();
                        }
 
@@ -73,13 +75,13 @@
                     $FullPath = $PictureFolder.basename($Picture);
 
                     //get the extension of picture that must be jpg , jpeg , png ;
-                      $PictureExtension = strtolower(pathinfo($FullPath , PATHINFO_EXTENSION));
+                    $PictureExtension = strtolower(pathinfo($FullPath , PATHINFO_EXTENSION));
                     // creatting valid extenstion for picture
                     $Extensions = array("jpg" , "jped" , "png");
                 //setting up user picture--end
                     if(in_array($PictureExtension, $Extensions))
                     {
-                               $sqlquery = "INSERT INTO USERS( ID , FirstName , Email , Password , Picture ) VALUES (0 ,'".$Name."' , '".$Email."' , '".$Password."' , '".$Picture."') ";    
+                               $sqlquery = "INSERT INTO USERS(FirstName , Email , Password , Picture ) VALUES ('".$Name."' , '".$Email."' , '".$Password."' , '".$Picture."');";    
                                if($MySqli->query($sqlquery) === true)
                                {
                                    move_uploaded_file($_FILES['file']['tmp_name'] , $PictureFolder.$Picture);                      
@@ -89,8 +91,7 @@
                                    {
                                         $row = $result->fetch_assoc();                         
                                         $_SESSION["CurrentUser"] = $row;  
-                                        header('location:http://localhost/ShoppingCart/WebView/home.php', false);
-                
+                                        header('location:http://localhost/ShoppingCart/WebView/home.php', false);            
                                    }
 
                                }
@@ -106,7 +107,6 @@
          <?php 
                include("../HeadersAndFooters/footer.php");
          ?>  
-        </div>
     </body>
 </html>
 
