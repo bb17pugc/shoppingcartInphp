@@ -6,8 +6,7 @@
     $result=$MySqli->query($qrySelect);
     if($result->num_rows > 0)
     {
-        $row = $result->fetch_assoc();
-        print $row['FirstName'];
+        $row = $result->fetch_assoc();        
     }
 ?>
  <div>
@@ -30,11 +29,114 @@
                 <div style="display: inline-block;width: 100%;padding: 10px">
                     <input value="<?php echo $row['FirstName'] ?>" type="text" name="FirstName" class="form-control" placeholder="write your name here" required />
                 <br />
+                
                 <input value="<?php echo $row['Email'] ?>" type="email" name="Email" class="form-control" placeholder="write your email here" required />
+                <br />
+              
+                <input value="<?php echo $row['Password'] ?>" type="text" name="Password" class="form-control" placeholder="write your email here" required />
+                <br />
+           
+                <input value="<?php echo $row['Password'] ?>" type="text" name="ConfirmPassword" class="form-control" placeholder="write your email here" required />
+                
                 <br />
                 </div>
                 
-                <div style="width: 100%" >
+                <div style="display: inline-block;width: 100%;padding: 10px" >
                     <input class="form-control" type="submit" />                   
                 </div>
              </form>
+            
+ <?php
+ if ($_SERVER["REQUEST_METHOD"] == "POST")
+ {   
+               $Name = $Email = $Password = $ConfirmPassword = $Picture = "";
+               $obj = new Errors();
+                         $Name = $_POST['FirstName'];
+                         $Email = $_POST['Email'];
+                         $Password = $_POST['Password'];
+                         $ConfirmPassword = $_POST['ConfirmPassword'];
+                         $Picture = $_FILES['file']['name'];                          
+             if($obj->CheckErrors( $Name , $Email , $Password , $ConfirmPassword , $Picture ))
+             {
+                   // checking if the user is registered already
+                       $CheckUserQuery = "SELECT FirstName FROM USERS WHERE Email = '".$Email."'";
+                       $result =  $MySqli->query($CheckUserQuery);
+                       if($result->num_rows > 0)
+                       {
+                           $Errors['DuplicateUser'] ="User exists already";
+                           //ShowError();
+                           die();
+                       }
+
+                //setting up user picture--start
+                    $Picture = $_FILES['file']['name'];
+                    $PictureFolder = "../Uploads/";
+                    $FullPath = $PictureFolder.basename($Picture);
+
+                    //get the extension of picture that must be jpg , jpeg , png ;
+                    $PictureExtension = strtolower(pathinfo($FullPath , PATHINFO_EXTENSION));
+                    // creatting valid extenstion for picture
+                    $Extensions = array("jpg" , "jped" , "png");
+                //setting up user picture--end
+                    
+                    if(in_array($PictureExtension, $Extensions))
+                    {
+                              
+                               $sqlquery = "UPDATE USERS SET ID  FirstName Email Password Picture ";
+                               if($MySqli->query($sqlquery) === true)
+                               {
+                                   move_uploaded_file($_FILES['file']['tmp_name'] , $PictureFolder.$Picture);                      
+                                   $qryRetUserName = "SELECT * FROM USERS WHERE Email = '".$Email."' ";
+                                   $result =$MySqli->query($qryRetUserName);
+                                   if($result->num_rows > 0)
+                                   {
+                                        $row = $result->fetch_assoc();                         
+                                        $_SESSION["CurrentUser"] = $row;  
+                                        header('location:http://localhost/ShoppingCart/WebView/home.php', false);            
+                                   }
+
+                               }
+                    }
+
+             }
+
+}
+
+?>
+            
+            
+         <?php 
+               include("../HeadersAndFooters/footer.php");
+         ?>  
+         <style>
+             
+              input
+              {
+                  margin-top: 10px;
+                  margin-bottom: 10px;
+              }
+               input[type="submit"]
+              {
+                  margin-top: 20px;
+              }
+        </style>
+<script>
+    function CheckFile()
+    {
+        $("#fileUpload").bind('change', function () {         
+            //this.files[0].size gets the size of your file.           
+        $("#picname").html(this.files[0].name);
+        });
+    }
+
+    function ShowImagePreview(imageUploader, previewImage) {
+        if (imageUploader.files && imageUploader.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $(previewImage).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(imageUploader.files[0]);
+        }
+    }
+   
+</script>

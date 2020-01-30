@@ -56,7 +56,7 @@
                          $Email = $_POST['Email'];
                          $Password = $_POST['Password'];
                          $ConfirmPassword = $_POST['ConfirmPassword'];
-                         $Picture = $_FILES['file']['name']; 
+                         $Picture = $_FILES['file']['name'];                          
              if($obj->CheckErrors( $Name , $Email , $Password , $ConfirmPassword , $Picture ))
              {
                    // checking if the user is registered already
@@ -79,9 +79,11 @@
                     // creatting valid extenstion for picture
                     $Extensions = array("jpg" , "jped" , "png");
                 //setting up user picture--end
+                    
                     if(in_array($PictureExtension, $Extensions))
                     {
-                               $sqlquery = "INSERT INTO USERS(FirstName , Email , Password , Picture ) VALUES ('".$Name."' , '".$Email."' , '".$Password."' , '".$Picture."');";    
+                              
+                               $sqlquery = "INSERT INTO USERS(ID , FirstName , Email , Password , Picture ) VALUES(0,'".$Name."' , '".$Email."' , '".$Password."' , '".$Picture."')";    
                                if($MySqli->query($sqlquery) === true)
                                {
                                    move_uploaded_file($_FILES['file']['tmp_name'] , $PictureFolder.$Picture);                      
@@ -107,9 +109,6 @@
          <?php 
                include("../HeadersAndFooters/footer.php");
          ?>  
-    </body>
-</html>
-
          <style>
              
               input
