@@ -3,7 +3,7 @@
      require '../Errors.php';
                 if(isset($_SESSION['CurrentUser']))
                {
-                               exit(header('location:http://localhost/ShoppingCart/WebView/home.php', false));                                    
+                    exit(header('location:http://localhost/ShoppingCart/WebView/home.php', false));                                    
                }
                
                function returnback()
