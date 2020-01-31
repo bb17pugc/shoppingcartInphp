@@ -1,8 +1,7 @@
 <?php
         require '../HeadersAndFooters/header.php';
-        if(isset($_SESSION['shopping_status']))
-        {
-            $qrySelect = "SELECT * FROM PRODUCTS WHERE ID = '".$_GET['productid']."'";
+        
+        $qrySelect = "SELECT * FROM PRODUCTS WHERE ID = '".$_GET['productid']."'";
             $result=$MySqli->query($qrySelect);
             $row = $result->fetch_assoc();
             $_GET['productid']="";
@@ -33,16 +32,40 @@
         {
             public $Items = array();
             
-            function AddItems($Name , $ID , $Price, $Catagory,$Picture)
+            function IsAddedd($ID)
             {
-                $lenth = count($this->Items);
-                $this->Items[$lenth]['ID'] = $ID; 
-                $this->Items[$lenth]['Name'] = $Name; 
-                $this->Items[$lenth]['Price'] = $Price; 
-                $this->Items[$lenth]['Catagory'] = $Catagory; 
-                $this->Items[$lenth]['Picture'] = $Picture; 
+                    for($i=0;$i<count($this->Items);$i++)
+                    {
+                       if($this->Items[$i]['ID'] == $ID)
+                        {
+                           $this->Items[$i]['Quantity']++;
+                            return true;
+                        }
+                    }
+                    return false;
+            }
+
+
+            function AddItems($Name , $ID , $Price, $Catagory,$Picture)
+            { 
+                //$this->clearAll();
+                $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
+                if(!$pageWasRefreshed ) 
+                {
+                    if(!$this->IsAddedd($ID))
+                    {
+                        $lenth = count($this->Items);   
+                        $this->Items[$lenth]['ID'] = $ID; 
+                        $this->Items[$lenth]['Name'] = $Name; 
+                        $this->Items[$lenth]['Price'] = $Price; 
+                        $this->Items[$lenth]['Catagory'] = $Catagory; 
+                        $this->Items[$lenth]['Picture'] = $Picture; 
+                        $this->Items[$lenth]['Quantity'] = '1'; 
+
+                    }
+                 }
                 ?>
-                    <div style="padding: 10px" >
+                    <div style="padding: 10px;background-color: lightskyblue" >
                                   <table cellspacing="0" >
                                     <tr>
                                         <td>
@@ -57,10 +80,13 @@
                                         <td>
                                             Picture
                                         </td>
+                                        <td>
+                                            Quantity
+                                        </td>
                                     </tr>
                                   
                    <?php
-                for($i=$lenth;$i>0;$i--)
+                for($i=count($this->Items)-1;$i>=0;$i--)
                 {  
                     ?>
 
@@ -85,6 +111,11 @@
                                                    print $this->Items[$i]['Picture'];
                                               ?>
                                         </td>
+                                        <td>
+                                            <?php
+                                                   print $this->Items[$i]['Quantity'];
+                                              ?>
+                                        </td>
                                     </tr>
                     <?php          
                 }
@@ -104,7 +135,7 @@
         $obj = GetCart();
         $obj->AddItems($Name , $ID, $Price, $Catagory, $Picture);        
 
-        }
+        
         ?>
  <?php 
                include("../HeadersAndFooters/footer.php");
