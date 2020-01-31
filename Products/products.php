@@ -3,6 +3,7 @@
         $qrySelect = "SELECT * FROM PRODUCTS";
         $result=$MySqli->query($qrySelect);
         $Picture = "../Uploads/";
+        $_SESSION['shopping_status'] = "yes";
         if($result->num_rows > 0)
         {
             ?>
@@ -54,7 +55,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="padding: 0px 10px 10px 0px" >
-                                                    <a href="../Products/Cart.php?<?php echo $row['ID'] ?> " class="btnCart">
+                                                    <a href="../Products/Cart.php?productid=<?php echo $row['ID'] ?> " class="btnCart">
                                                         Add to cart                                                         
                                                          <i  class="fa fa-bitbucket-square fa-1x">
                                                              
@@ -87,6 +88,7 @@
     }
    .col-3 a
     {
+        text-decoration: NONE;
          border:none;float:right;padding:10px;background-color: green;color:white;cursor:pointer;
     }
     .col-3 a:hover
