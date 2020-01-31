@@ -14,7 +14,7 @@ body{
               {
                 color: white;
               }  
-h1{
+h1 , body , table , div{
     font-family: sans-serif;
 }
 .navigation-menu {

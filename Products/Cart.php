@@ -45,10 +45,17 @@
                     return false;
             }
 
-
+            function Total()
+            {     
+                $Total = 0;
+                   for($i=0;$i<count($this->Items);$i++)
+                    {
+                       $Total = $Total + $this->Items[$i]['Quantity']* $this->Items[$i]['Price'];
+                    }
+                    return $Total;
+            }
             function AddItems($Name , $ID , $Price, $Catagory,$Picture)
             { 
-                //$this->clearAll();
                 $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
                 if(!$pageWasRefreshed ) 
                 {
@@ -66,23 +73,33 @@
                  }
                 ?>
                     <div style="padding: 10px;background-color: lightskyblue" >
-                                  <table cellspacing="0" >
-                                    <tr>
-                                        <td>
+                                  <table cellspacing="0" cellpadding="10" >
+                                      <tr id="calrow">
+                                          <th colspan="6" style="background-color: gray;border-radius:5px 5px 0px 0px " >
+                                              <div>
+                                                  <label style="color: white;float: right" > TOTAL : <?php print $this->Total(); ?></label>
+                                              </div>
+                                        </th>
+                                       </tr>
+                                       <tr style="color: white">
+                                        <th>
                                             Name
-                                        </td>
-                                        <td>
+                                        </th>
+                                        <th>
                                             Price
-                                        </td>
-                                        <td>
+                                        </th>
+                                        <th>
                                             Catagory
-                                        </td>
-                                        <td>
+                                        </th>
+                                        <th>
                                             Picture
-                                        </td>
-                                        <td>
+                                        </th>
+                                        <th>
                                             Quantity
-                                        </td>
+                                        </th>
+                                        <th>
+                                            Sub_Total
+                                        </th>
                                     </tr>
                                   
                    <?php
@@ -116,6 +133,12 @@
                                                    print $this->Items[$i]['Quantity'];
                                               ?>
                                         </td>
+                                        <td>
+                                            <?php
+                                                   print $this->Items[$i]['Quantity']*$this->Items[$i]['Price'];
+                                                   
+                                            ?>
+                                        </td>
                                     </tr>
                     <?php          
                 }
@@ -143,11 +166,27 @@
 <style>
       table , tr,td
       {
-          border:solid 1px gray;
           table-layout: fixed;
       }
       table
       {
+          background-color: white;
           width: 100%;
+          text-align: center;
+          border-radius: 5px;
+          font-family: sans-serif;
+      }
+      th
+      {
+          background-color: gray;
+      }
+      #calrow th
+      {
+          background-color: lightskyblue;
+      }
+      td , th
+      {
+          border-bottom: solid 1px gray;
+          
       }
 </style>       
