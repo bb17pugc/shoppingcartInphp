@@ -5,6 +5,7 @@
 
 <html>
     <head>     
+        <script src="../js/ajax.js" type="text/javascript"></script>
         <script src="../js/jquery.js" type="text/javascript"></script>
         <link href="../style.css" rel="stylesheet" type="text/css"/>
         <link href="../fontawesome/css/all.css" rel="stylesheet" type="text/css"/>

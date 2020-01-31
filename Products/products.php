@@ -1,5 +1,5 @@
 <?php
-        require '../HeadersAndFooters/header.php';
+        require '../HeadersAndFooters/header.php';       
         $qrySelect = "SELECT * FROM PRODUCTS";
         $result=$MySqli->query($qrySelect);
         $Picture = "../Uploads/";
@@ -10,7 +10,7 @@
         if($result->num_rows > 0)
         {
             ?>
-                    <div style="max-width: 100%;border:solid 1px lightskyblue;max-height:1000px ;overflow-y: auto;display: flex;flex-wrap: wrap;padding: 10px">
+                    <div style="text-align: center;max-width: 100%;border:solid 1px lightskyblue;max-height:1000px ;overflow-y: auto;display: flex;flex-wrap: wrap;padding: 10px">
             <?php
             while($row=$result->fetch_assoc())
             {
@@ -58,9 +58,9 @@
                                             </tr>
                                             <tr>
                                                 <td style="padding: 0px 10px 10px 0px" >
-                                                    <button>
-                                                         Add to cart                                                         
-                                                         <i class="fa fa-bitbucket-square fa-1x">
+                                                    <button class="btnCart">
+                                                        Add to cart                                                         
+                                                         <i  class="fa fa-bitbucket-square fa-1x">
                                                              
                                                          </i>
                                                     </button>
@@ -75,17 +75,19 @@
                    </div>         
             <?php
         }
-        
-       
+    
 ?>
 <style>
     .col-3
     {
+        display: inline-block;
         flex-grow:1;
-        width : calc(100%*1/4);
+        max-width : 30%;
+        min-width : 30%;
         font-family: sans-serif;
         color:white;
         padding:10px;
+        text-transform: uppercase;
     }
     button
     {
@@ -99,3 +101,24 @@
     }
     
 </style>
+<script>
+        
+        $(document).ready(function()
+        {
+            $('button').click(function()
+            {
+                    $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            url: "/cart.php",
+                            data: {name:"5"},
+                            success:function()
+                            {
+                               
+                            }
+                          });
+            });
+            
+        });
+        
+</script>
