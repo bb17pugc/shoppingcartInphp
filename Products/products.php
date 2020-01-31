@@ -3,10 +3,6 @@
         $qrySelect = "SELECT * FROM PRODUCTS";
         $result=$MySqli->query($qrySelect);
         $Picture = "../Uploads/";
-                function test()
-        {
-            print 'hi';
-        }
         if($result->num_rows > 0)
         {
             ?>
@@ -58,12 +54,12 @@
                                             </tr>
                                             <tr>
                                                 <td style="padding: 0px 10px 10px 0px" >
-                                                    <button class="btnCart">
+                                                    <a href="../Products/Cart.php?<?php echo $row['ID'] ?> " class="btnCart">
                                                         Add to cart                                                         
                                                          <i  class="fa fa-bitbucket-square fa-1x">
                                                              
                                                          </i>
-                                                    </button>
+                                                    </a>
                                                 </td>  
                                             </tr>
                                         </table>
@@ -89,11 +85,11 @@
         padding:10px;
         text-transform: uppercase;
     }
-    button
+   .col-3 a
     {
          border:none;float:right;padding:10px;background-color: green;color:white;cursor:pointer;
     }
-    button:hover
+    .col-3 a:hover
     {
         background-color: skyblue;
         border: solid 1px skyblue;
@@ -101,24 +97,3 @@
     }
     
 </style>
-<script>
-        
-        $(document).ready(function()
-        {
-            $('button').click(function()
-            {
-                    $.ajax({
-                            type: "POST",
-                            dataType: "json",
-                            url: "/cart.php",
-                            data: {name:"5"},
-                            success:function()
-                            {
-                               
-                            }
-                          });
-            });
-            
-        });
-        
-</script>

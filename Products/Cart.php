@@ -1,3 +1,7 @@
 <?php
-  $_SESSION['CurrentUser'] = $_POST['name'];
-  ?>
+        require '../HeadersAndFooters/header.php';       
+        $qrySelect = "SELECT * FROM PRODUCTS";
+        $result=$MySqli->query($qrySelect);
+        $Picture = "../Uploads/";
+     
+?>
