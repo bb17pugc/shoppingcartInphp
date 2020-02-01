@@ -21,11 +21,12 @@ h1 , body , table , div{
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  background-color: gray;
-  width: 100%;
-}
- 
+  overflow: hidden;  width: 100%;
+}   
+ .bg-color , a
+ {
+     background-color: green;
+ }
 .navigation-menu >  li 
 {
     display: block;

@@ -17,9 +17,6 @@
         <link href="../fontawesome/css/solid.css" rel="stylesheet" type="text/css"/>
      </head>
      <body style="height: fit-content" >
-    <div style="width: 100%;font-family: sans-serif;padding-bottom: 0px;height: fit-content;background-color: lightskyblue;padding-top: 0px" >            
-       <h1 style="color:white;margin-top: 0px" > E-Commerce Site </h1>
-    <div style="margin-top: 10%;display: flex;" >
      <?php
            require_once '../Menu/menu.php';
        ?>    

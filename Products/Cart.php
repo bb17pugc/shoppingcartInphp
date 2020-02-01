@@ -3,10 +3,8 @@
         
         $qrySelect = "SELECT * FROM PRODUCTS WHERE ID = '".$_GET['productid']."'";
             $result=$MySqli->query($qrySelect);
-            $row = $result->fetch_assoc();
-            $_GET['productid']="";
+            $row = $result->fetch_assoc();            
             $Picture = "../Uploads/";
-            unset($_SESSION['shopping_status']);
         
         //creating class to store the cart items
         $ID=$Name=$Price=$Catagory=$Picture="";
@@ -73,15 +71,26 @@
                  }
                 ?>
                     <div style="padding: 10px;background-color: lightskyblue" >
-                                  <table cellspacing="0" cellpadding="10" >
+                        <table  cellspacing="0" cellpadding="10" >
                                       <tr id="calrow">
-                                          <th colspan="6" style="background-color: gray;border-radius:5px 5px 0px 0px " >
+                                          <th colspan="6"  style="border-radius:5px 5px 0px 0px;" >
                                               <div>
-                                                  <label style="color: white;float: right" > TOTAL : <?php print $this->Total(); ?></label>
+                                                  <label style="float: left;font-size: 40px;font-weight: 300" > TOTAL : <?php print $this->Total(); ?></label>
+                                              </div>
+                                              <div>
+                                                   <button>
+                                                       Continue Shopping <i class="fa fa-arrow-circle-o-right">   </i>
+                                                   </button>
+                                                  <button class="clear">
+                                                      <i class="fa fa-trash-o"></i> Clear
+                                                   </button>
                                               </div>
                                         </th>
                                        </tr>
                                        <tr style="color: white">
+                                        <th>
+                                            Picture
+                                        </th>
                                         <th>
                                             Name
                                         </th>
@@ -90,9 +99,6 @@
                                         </th>
                                         <th>
                                             Catagory
-                                        </th>
-                                        <th>
-                                            Picture
                                         </th>
                                         <th>
                                             Quantity
@@ -110,12 +116,15 @@
                               <tr>
                                         <td>
                                               <?php
-                                                   print  $i." ".$this->Items[$i]['Name'];
+                                                   ?>
+                                            <img style="border-radius: 30px;padding: 6px;border: solid 2px lightskyblue" width="40" height="40" src="<?php print "../Uploads/".$this->Items[$i]['Picture'] ?>" />
+                                                   <?php
+                                                   
                                               ?>
                                         </td>
                                         <td>
-                                            <?php
-                                                   print $this->Items[$i]['Catagory'];
+                                              <?php
+                                                   print  $this->Items[$i]['Name'];
                                               ?>
                                         </td>
                                         <td>
@@ -124,8 +133,8 @@
                                               ?>
                                         </td>
                                         <td>
-                                            <?php
-                                                   print $this->Items[$i]['Picture'];
+                                              <?php
+                                                   print $this->Items[$i]['Catagory'];
                                               ?>
                                         </td>
                                         <td>
@@ -135,8 +144,7 @@
                                         </td>
                                         <td>
                                             <?php
-                                                   print $this->Items[$i]['Quantity']*$this->Items[$i]['Price'];
-                                                   
+                                                   print $this->Items[$i]['Quantity']*$this->Items[$i]['Price'];                                                   
                                             ?>
                                         </td>
                                     </tr>
@@ -168,6 +176,25 @@
       {
           table-layout: fixed;
       }
+      button
+      {
+          float:right;
+          padding: 10px;
+          border: none;
+          border-radius: 0px;
+      }
+      button:hover
+      {
+          background-color: green;
+          border: none;
+          cursor: pointer;
+          border-color: green;
+
+      }
+      .clear:hover
+      {
+          background-color: red !important;
+      }
       table
       {
           background-color: white;
@@ -182,11 +209,11 @@
       }
       #calrow th
       {
-          background-color: lightskyblue;
+          background-color: whitesmoke;
       }
       td , th
       {
-          border-bottom: solid 1px gray;
+          border-bottom: solid 1px lightgray;
           
       }
 </style>       

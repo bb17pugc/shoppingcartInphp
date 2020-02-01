@@ -1,10 +1,10 @@
-<div style="display: flex;width: 100%;background-color: grey;justify-content: space-between">
-        <div style="background-color: grey"> 
+<div class="bg-color" style="display: flex;width: 100%;justify-content: space-between">
+    <div class="bg-color"> 
   <?php 
         if(isset($_SESSION["CurrentUser"]))
         {
             ?>
-                    <ul class="navigation-menu" >
+                    <ul class="navigation-menu" style="display: flex;align-items: center" >
                         <li>
                             <a  href="../WebView/home.php" id="home" > home</a>
                         </li>
@@ -16,6 +16,30 @@
                         </li>
                         <li>
                                 <a>Contact Us</a>
+                        </li>
+                        <li class="bg-color" style="justify-content: center;flex-direction: row;align-items: center">
+                            <?php
+                                    if(substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1) == "products.php")
+                                    {
+                                        ?>
+                            <div>
+                                <select>
+                                                <option>
+                                                        item1
+                                                </option>
+                                                <option>
+                                                        item1
+                                                </option>
+                                                <option>
+                                                        item1
+                                                </option>
+                                        </select>
+                            
+                            </div>
+                            <?php
+                                    }
+                                ?>
+                             
                         </li>
 
                       </ul>
@@ -72,7 +96,18 @@
   </ul>
 </div>
 </div>
-
+<style>
+      select
+      {
+          width: 300px;
+          padding:10px;
+         
+      }
+      select option
+      {
+          padding: 40px;
+      }
+</style>
 <script type="text/javascript" >    
     $(document).ready(function()
 {
