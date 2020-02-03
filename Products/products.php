@@ -1,6 +1,21 @@
 <?php
-        require '../HeadersAndFooters/header.php';       
-        $qrySelect = "SELECT * FROM PRODUCTS";
+        require '../HeadersAndFooters/header.php';
+        $Catagory; 
+        if(!empty($_POST['catagory']))
+        {
+            $Catagory = $_POST['catagory'];
+            $qrySelect = "SELECT * FROM PRODUCTS WHERE Catagory = '".$Catagory."'";
+        }
+        else if(!empty($_GET['catagory']))
+        {
+            $Catagory = $_GET['catagory'];
+            $qrySelect = "SELECT * FROM PRODUCTS WHERE Catagory = '".$Catagory."'";
+        }
+        else
+        {
+            $Catagory = '';
+            $qrySelect = "SELECT * FROM PRODUCTS";    
+        }
         $result=$MySqli->query($qrySelect);
         $Picture = "../Uploads/";
         $_SESSION['shopping_status'] = "yes";
@@ -55,7 +70,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="padding: 0px 10px 10px 0px" >
-                                                    <a href="../Products/Cart.php?productid=<?php echo $row['ID'] ?> " class="btnCart">
+                                                    <a href="../Products/Cart.php?productid=<?php echo $row['ID'] ?>&catagory=<?php echo $Catagory?>" class="btnCart">
                                                         Add to cart                                                         
                                                          <i  class="fa fa-bitbucket-square fa-1x">
                                                              

@@ -5,7 +5,6 @@
             $result=$MySqli->query($qrySelect);
             $row = $result->fetch_assoc();            
             $Picture = "../Uploads/";
-        
         //creating class to store the cart items
         $ID=$Name=$Price=$Catagory=$Picture="";
         $ID = $row['ID'];        
@@ -29,7 +28,7 @@
         class CartItems
         {
             public $Items = array();
-            
+            public $TotalItems = 0;
             function IsAddedd($ID)
             {
                     for($i=0;$i<count($this->Items);$i++)
@@ -42,13 +41,15 @@
                     }
                     return false;
             }
-
             function Total()
             {     
                 $Total = 0;
+                $this->TotalItems = 0;
                    for($i=0;$i<count($this->Items);$i++)
                     {
                        $Total = $Total + $this->Items[$i]['Quantity']* $this->Items[$i]['Price'];
+                       $this->TotalItems = $this->TotalItems + $this->Items[$i]['Quantity'];
+                       
                     }
                     return $Total;
             }
@@ -78,10 +79,10 @@
                                                   <label style="float: left;font-size: 40px;font-weight: 300" > TOTAL : <?php print $this->Total(); ?></label>
                                               </div>
                                               <div>
-                                                   <button>
-                                                       Continue Shopping <i class="fa fa-arrow-circle-o-right">   </i>
-                                                   </button>
-                                                  <button class="clear">
+                                                  <a class="continue" href="../Products/products.php?catagory=<?php echo $_GET['catagory'] ?>">
+                                                           Continue Shopping <i class="fa fa-arrow-circle-o-right">   </i>
+                                                       </a> 
+                                                  <button class="clear trash">
                                                       <i class="fa fa-trash-o"></i> Clear
                                                    </button>
                                               </div>
@@ -163,10 +164,8 @@
             }
         }        
        
-        $obj = GetCart();
-        $obj->AddItems($Name , $ID, $Price, $Catagory, $Picture);        
-
-        
+        $cart = GetCart();
+        $cart->AddItems($Name , $ID, $Price, $Catagory, $Picture);
         ?>
  <?php 
                include("../HeadersAndFooters/footer.php");
@@ -176,13 +175,23 @@
       {
           table-layout: fixed;
       }
-      button
+      button,.continue
       {
           float:right;
           padding: 10px;
           border: none;
           border-radius: 0px;
           font-size: 20px;
+          text-decoration: none;
+          color: white;
+      }
+      .trash
+      {
+          background-color: gray;
+      }
+      .continue:hover
+      {
+          background-color: blue;
       }
       button:hover
       {

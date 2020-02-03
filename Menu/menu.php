@@ -1,3 +1,6 @@
+<?php 
+    require_once '../Products/Cart.php';
+?>
 <div class="bg-color" style="display: flex;width: 100%;justify-content: space-between">
     <div class="bg-color"> 
   <?php 
@@ -24,8 +27,22 @@
                                     if(substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1) == "products.php")
                                     {
                                         ?>
-                            <form style="background-color: white;vertical-align: middle;display:table-cell;flex-direction: row;justify-content: center;align-items: center" >
-                                <select>
+                            <form method="post" action="products.php" style="background-color: white;vertical-align: middle;display:table-cell;flex-direction: row;justify-content: center;align-items: center" >
+                                <select name="catagory">
+                                    <option>
+                                            <?php
+                                             if(!empty($_REQUEST['catagory']))
+                                             {
+                                                             echo $_REQUEST['catagory'];
+                                             }
+                                             else
+                                             {      ?>
+                                                      All Products   
+                                                 <?php
+                                           
+                                             }
+                                            ?>
+                                    </option>
                                           <?php 
                                               while ($val = mysqli_fetch_array($result))
                                               {
@@ -77,7 +94,7 @@
                                         ?>
                                             <li>
                                                 <a href="../Users/userdetail.php?userid=<?php echo $userdata['ID']; ?>" style="padding: 0px 5px 0px 5px  " >
-                                                        <img src=' <?php echo $Picture ?> ' width="45" height="51" style="vertical-align: middle;border-radius: 40px"  />                                     
+                                                        <img src=' <?php echo $Picture ?> ' width="45" height="50" style="vertical-align: middle;border-radius: 40px"  />                                     
                                                               <?php
                                                                     echo $userdata['Email'];
                                                                 ?>    
@@ -85,6 +102,16 @@
                                             </li>                                      
                         <li>
                                 <a href="../Users/logout.php" >logout</a>                
+                        </li>
+                        <li>
+                            <a>
+                                <i class="fa fa-bitbucket"></i>
+                             <?php 
+                                  $obj = GetCart();
+                                  print $obj->TotalItems
+                             ?>
+                                
+                            </a>
                         </li>                        
                     <?php
                 }
