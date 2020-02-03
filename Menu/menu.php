@@ -1,6 +1,4 @@
-<?php 
-    require_once '../Products/Cart.php';
-?>
+
 <div class="bg-color" style="display: flex;width: 100%;justify-content: space-between">
     <div class="bg-color"> 
   <?php 
@@ -104,11 +102,17 @@
                                 <a href="../Users/logout.php" >logout</a>                
                         </li>
                         <li>
-                            <a>
+                            <a href="../Products/Cart.php" >
                                 <i class="fa fa-bitbucket"></i>
                              <?php 
-                                  $obj = GetCart();
-                                  print $obj->TotalItems
+                                    if(isset($_SESSION['CartTotalItems']))
+                                    {
+                                        print $_SESSION['CartTotalItems'];
+                                    }
+                                     else 
+                                     {
+                                         print '0';   
+                                     }
                              ?>
                                 
                             </a>

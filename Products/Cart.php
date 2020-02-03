@@ -51,6 +51,7 @@
                        $this->TotalItems = $this->TotalItems + $this->Items[$i]['Quantity'];
                        
                     }
+                    $_SESSION['CartTotalItems'] = $this->TotalItems;
                     return $Total;
             }
             function AddItems($Name , $ID , $Price, $Catagory,$Picture)
@@ -166,7 +167,7 @@
        
         $cart = GetCart();
         $cart->AddItems($Name , $ID, $Price, $Catagory, $Picture);
-        ?>
+      ?>
  <?php 
                include("../HeadersAndFooters/footer.php");
  ?>  
