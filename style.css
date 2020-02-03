@@ -27,6 +27,10 @@ h1 , body , table , div{
  {
      background-color: green;
  }
+ button , input , select
+ {
+     outline: none;
+ }
 .navigation-menu >  li 
 {
     display: block;

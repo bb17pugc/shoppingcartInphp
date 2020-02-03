@@ -182,6 +182,7 @@
           padding: 10px;
           border: none;
           border-radius: 0px;
+          font-size: 20px;
       }
       button:hover
       {
@@ -189,7 +190,7 @@
           border: none;
           cursor: pointer;
           border-color: green;
-
+          color: white;
       }
       .clear:hover
       {

@@ -19,23 +19,32 @@
                         </li>
                         <li class="bg-color" style="justify-content: center;flex-direction: row;align-items: center">
                             <?php
+                                 $qrySelect = "SELECT DISTINCT CATAGORY FROM PRODUCTS";
+                                 $result=$MySqli->query($qrySelect);
                                     if(substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1) == "products.php")
                                     {
                                         ?>
-                            <div>
+                            <form style="background-color: white;vertical-align: middle;display:table-cell;flex-direction: row;justify-content: center;align-items: center" >
                                 <select>
-                                                <option>
-                                                        item1
-                                                </option>
-                                                <option>
-                                                        item1
-                                                </option>
-                                                <option>
-                                                        item1
-                                                </option>
-                                        </select>
-                            
-                            </div>
+                                          <?php 
+                                              while ($val = mysqli_fetch_array($result))
+                                              {
+                                                  ?>
+                                                   <option>
+                                                       <?php
+                                                           print $val['CATAGORY'];
+                                                       ?>
+                                                   </option>      
+                                                  <?php
+                                              }
+                                          ?>    
+                                </select>
+                                <button class="search" type="submit" >
+                                    <i class="fa fa-arrow-circle-o-right fa-2x">
+                                        
+                                    </i>
+                                </button>    
+                            </form>
                             <?php
                                     }
                                 ?>
@@ -101,12 +110,28 @@
       {
           width: 300px;
           padding:10px;
-         
+          border: none;
       }
-      select option
+      select , .search
       {
-          padding: 40px;
+          background-color: white;
+          cursor: pointer;
       }
+      .search
+      {
+          display: table-cell;
+          vertical-align: middle;
+          margin-left:-5px;
+          padding: 4px;
+          border:none;
+      }
+      .search:hover
+      {
+          background-color: green;
+          color: white;
+          border:solid 1px white;
+      }
+     
 </style>
 <script type="text/javascript" >    
     $(document).ready(function()
