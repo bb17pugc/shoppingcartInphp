@@ -1,7 +1,13 @@
 <?php
         require '../HeadersAndFooters/header.php';
-        
-        $qrySelect = "SELECT * FROM PRODUCTS WHERE ID = '".$_GET['productid']."'";
+        if(isset($_GET['productid']))
+        {
+             $qrySelect = "SELECT * FROM PRODUCTS WHERE ID = '".$_GET['productid']."'";   
+        }
+        else
+        {
+            $qrySelect = "SELECT * FROM PRODUCTS ";
+        }
             $result=$MySqli->query($qrySelect);
             $row = $result->fetch_assoc();            
             $Picture = "../Uploads/";
@@ -57,7 +63,7 @@
             function AddItems($Name , $ID , $Price, $Catagory,$Picture)
             { 
                 $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
-                if(!$pageWasRefreshed ) 
+                if(!$pageWasRefreshed) 
                 {
                     if(!$this->IsAddedd($ID))
                     {
