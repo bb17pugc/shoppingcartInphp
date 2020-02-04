@@ -70,11 +70,11 @@
                                             </tr>
                                             <tr>
                                                 <td style="padding: 0px 10px 10px 0px" >
-                                                    <a href="../Products/Cart.php?productid=<?php echo $row['ID'] ?>&catagory=<?php echo $Catagory?>" class="btnCart">
-                                                        Add to cart                                                         
-                                                         <i  class="fa fa-bitbucket-square fa-1x">
-                                                             
-                                                         </i>
+                                                    <form method="post" action="../Products/Cart.php">
+                                                        <input value="<?php echo $row['ID'] ?>" > 
+                                                        <input value="<?php echo $row['Catagory'] ?>" >
+                                                        <input class="cart" type="submit" value="Add to Cart" />
+                                                    </form>
                                                     </a>
                                                 </td>  
                                             </tr>
@@ -101,12 +101,12 @@
         padding:10px;
         text-transform: uppercase;
     }
-   .col-3 a
+   .col-3 .cart
     {
         text-decoration: NONE;
          border:none;float:right;padding:10px;background-color: green;color:white;cursor:pointer;
     }
-    .col-3 a:hover
+    .col-3 .cart:hover
     {
         background-color: skyblue;
         border: solid 1px skyblue;

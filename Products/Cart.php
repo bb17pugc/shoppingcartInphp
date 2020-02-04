@@ -1,12 +1,8 @@
 <?php
         require '../HeadersAndFooters/header.php';
-        if(isset($_GET['productid']))
+        if($_SERVER['REQUEST_METHOD'] == "POST")
         {
-             $qrySelect = "SELECT * FROM PRODUCTS WHERE ID = '".$_GET['productid']."'";   
-        }
-        else
-        {
-            $qrySelect = "SELECT * FROM PRODUCTS ";
+              $qrySelect = "SELECT * FROM PRODUCTS WHERE ID = '".$_POST['ID']."'";   
         }
             $result=$MySqli->query($qrySelect);
             $row = $result->fetch_assoc();            
